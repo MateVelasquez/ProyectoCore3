@@ -9,6 +9,7 @@ namespace ProyectoCore.Models
         {
             ProductoQuimicos = new HashSet<ProductoQuimico>();
             ProyeccionAnuals = new HashSet<ProyeccionAnual>();
+            RendimientoGerenteTecnicos = new HashSet<RendimientoGerenteTecnico>();
         }
 
         public byte IdExportacion { get; set; }
@@ -19,5 +20,6 @@ namespace ProyectoCore.Models
         public virtual Trabajador IdTrabajadorNavigation { get; set; }
         public virtual ICollection<ProductoQuimico> ProductoQuimicos { get; set; }
         public virtual ICollection<ProyeccionAnual> ProyeccionAnuals { get; set; }
+        public virtual ICollection<RendimientoGerenteTecnico> RendimientoGerenteTecnicos { get; set; }
     }
 }

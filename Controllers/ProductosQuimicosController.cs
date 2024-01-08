@@ -10,7 +10,8 @@ using ProyectoCore.Models;
 
 namespace ProyectoCore.Controllers
 {
-    [Authorize(Roles = "GerenteTecnico")]
+    [Authorize(Roles = "Administrador")]
+   
     public class ProductosQuimicosController : Controller
     {
         private readonly CoreContext _context;

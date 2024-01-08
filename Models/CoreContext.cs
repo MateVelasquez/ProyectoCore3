@@ -20,6 +20,7 @@ namespace ProyectoCore.Models
         public virtual DbSet<Exportacion> Exportacions { get; set; }
         public virtual DbSet<ProductoQuimico> ProductoQuimicos { get; set; }
         public virtual DbSet<ProyeccionAnual> ProyeccionAnuals { get; set; }
+        public virtual DbSet<RendimientoGerenteTecnico> RendimientoGerenteTecnicos { get; set; }
         public virtual DbSet<TallosCosechado> TallosCosechados { get; set; }
         public virtual DbSet<Trabajador> Trabajadors { get; set; }
 
@@ -27,8 +28,8 @@ namespace ProyectoCore.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-               // optionsBuilder.UseSqlServer("server=(localdb)\\mssqllocaldb; database=Core; integrated security=true;");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("server=(localdb)\\mssqllocaldb; database=Core; integrated security=true;");
             }
         }
 
@@ -151,6 +152,44 @@ namespace ProyectoCore.Models
                     .HasForeignKey(d => d.IdTrabajador)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_idTrabajadorPA");
+            });
+
+            modelBuilder.Entity<RendimientoGerenteTecnico>(entity =>
+            {
+                entity.HasKey(e => e.IdRendimientoGerenteTecnico)
+                    .HasName("PK_idRendimientoGerenteTecnico");
+
+                entity.ToTable("RendimientoGerenteTecnico");
+
+                entity.Property(e => e.IdRendimientoGerenteTecnico)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("idRendimientoGerenteTecnico");
+
+                entity.Property(e => e.Cantidad).HasColumnName("cantidad");
+
+                entity.Property(e => e.IdExportacion).HasColumnName("idExportacion");
+
+                entity.Property(e => e.IdProyeccionAnual).HasColumnName("idProyeccionAnual");
+
+                entity.Property(e => e.IdTrabajador).HasColumnName("idTrabajador");
+
+                entity.HasOne(d => d.IdExportacionNavigation)
+                    .WithMany(p => p.RendimientoGerenteTecnicos)
+                    .HasForeignKey(d => d.IdExportacion)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_idExportacionRGT");
+
+                entity.HasOne(d => d.IdProyeccionAnualNavigation)
+                    .WithMany(p => p.RendimientoGerenteTecnicos)
+                    .HasForeignKey(d => d.IdProyeccionAnual)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_idProyeccionAnual");
+
+                entity.HasOne(d => d.IdTrabajadorNavigation)
+                    .WithMany(p => p.RendimientoGerenteTecnicos)
+                    .HasForeignKey(d => d.IdTrabajador)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_idTrabajador");
             });
 
             modelBuilder.Entity<TallosCosechado>(entity =>

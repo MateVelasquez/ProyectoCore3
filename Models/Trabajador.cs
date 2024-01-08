@@ -11,6 +11,7 @@ namespace ProyectoCore.Models
             Exportacions = new HashSet<Exportacion>();
             ProductoQuimicos = new HashSet<ProductoQuimico>();
             ProyeccionAnuals = new HashSet<ProyeccionAnual>();
+            RendimientoGerenteTecnicos = new HashSet<RendimientoGerenteTecnico>();
             TallosCosechados = new HashSet<TallosCosechado>();
         }
 
@@ -26,6 +27,7 @@ namespace ProyectoCore.Models
         public virtual ICollection<Exportacion> Exportacions { get; set; }
         public virtual ICollection<ProductoQuimico> ProductoQuimicos { get; set; }
         public virtual ICollection<ProyeccionAnual> ProyeccionAnuals { get; set; }
+        public virtual ICollection<RendimientoGerenteTecnico> RendimientoGerenteTecnicos { get; set; }
         public virtual ICollection<TallosCosechado> TallosCosechados { get; set; }
     }
 }

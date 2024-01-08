@@ -1,0 +1,27 @@
+﻿@model List<ProyectoCore.Models.RendimientoGerenteTecnico>
+
+<h2>Rendimientos del Trabajador</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id Proyeccion Anual</th>
+            <th>Id Exportacion</th>
+            <th>Id Trabajador</th>
+            <th>Cantidad</th>
+            <th>Porcentaje Completacion</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var rendimiento in Model)
+        {
+            <tr>
+                <td>@rendimiento.IdProyeccionAnualNavigation.IdProyeccionAnual</td>
+                <td>@rendimiento.IdExportacionNavigation.IdExportacion</td>
+                <td>@rendimiento.IdTrabajadorNavigation.IdTrabajador</td>
+                <td>@rendimiento.Cantidad</td>
+                <td>@((double)rendimiento.Cantidad / Model.Where(r => r.IdTrabajador == rendimiento.IdTrabajador).Sum(r => r.Cantidad) * 100)%</td>
+            </tr>
+        }
+    </tbody>
+</table>

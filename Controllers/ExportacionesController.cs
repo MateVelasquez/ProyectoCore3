@@ -68,6 +68,8 @@ namespace ProyectoCore.Controllers
             return View(exportacion);
         }
 
+        
+
         // GET: Exportaciones/Edit/5
         public async Task<IActionResult> Edit(byte? id)
         {
